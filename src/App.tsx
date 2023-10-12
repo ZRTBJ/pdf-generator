@@ -1,24 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { usePDF } from "react-to-pdf";
+import PDFContent from "./components/pdf";
+import { Print } from "./icons";
+import "./App.css";
 
 function App() {
+  const { toPDF, targetRef } = usePDF({ filename: "research.pdf" });
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="button_wrapper">
+        <button className="print_button" onClick={() => toPDF()}>
+          <Print /> Print
+        </button>
+      </div>
+      <div ref={targetRef} className="pdf_content">
+        <PDFContent />
+      </div>
     </div>
   );
 }
